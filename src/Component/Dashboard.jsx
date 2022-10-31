@@ -1,9 +1,6 @@
 import { useState } from "react";
-import useLocalStorage from "../useLocalStorageHook/useLocalStorage";
-import usePrevious from "../usePreviousHook/usePrevious";
-import useDebounce from "../useDebouncing/useDebounce";
-import useToggle from "../useToggle/useToggle";
-import useMousePosition from "../useMousePosition/useMousePosition";
+import{ useLocalStorage, usePrevious, useDebounce, useToggle, useMousePosition} from "simform-custom-hook";
+
 
 const cities = ["Ahmedabad", "Surat", "Gandhinagar", "Delhi", "Mumbai"];
 
