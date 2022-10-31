@@ -1,7 +1,8 @@
 {
-  "name": "custom-hook",
+  "name": "simform-custom-hook",
   "version": "0.1.0",
-  "private": true,
+  "description": "A collection of Custom Hooks for React.",
+  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -10,6 +11,19 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
+  },
+  "author": "Mohit Porwal",
+  "license": "MIT",
+  "keywords": [
+    "custom-hooks",
+    "react",
+    "react-hooks",
+    "react-hook",
+    "custom-hook"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohitporwal26/custom-hook.git"
   },
   "scripts": {
     "start": "react-scripts start",
