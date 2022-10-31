@@ -1,70 +1,195 @@
-# Getting Started with Create React App
+# Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📗 Index
 
-## Available Scripts
+- [useLocalStorage](#-uselocalstorage)
+- [useDebounce](#-usedebounce)
+- [useToggle](#-usetoggle)
+- [useMousePosition](#-usemouseposition)
+- [usePrevious](#-useprevious)
 
-In the project directory, you can run:
+</br>
 
-### `npm start`
+## 💾 useLocalStorage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Custom useState hook which saves the state value in localStorage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Usage
 
-### `npm test`
+```jsx
+import React from "react";
+import { useLocalStorage } from "use-custom-hooks";
+const LocalValue = () => {
+  const [username, setUserName] = useLocalStorage("john_doe", "username");
+  /*
+   If username exists in localStorage, the value of username state will be
+   localStorage.getItem("username"). If username doesn't exist in localStorage, 
+   the value of the state will be "john-doe" and a new item will be created in
+   localStorage will key "username"
+  */
+  return <span>Value from localstorage is {username}</span>;
+};
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Parameters
 
-### `npm run build`
+1. `initialValue` (_any_) : Initial value of the state.
+2. `key` (_String_) : Key for the localStorage.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Return value
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`[state,setState]`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. `state` (_any_) : The created state.
+2. `setState` (_function_) : Function to change the state value.
 
-### `npm run eject`
+</br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🏀 useDebounce
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Convert a normal function to a debounced function.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> Note: More about Debouncing : [here](https://www.geeksforgeeks.org/debouncing-in-javascript/)
+### Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```jsx
+import React from "react";
+import { useDebounce } from "use-custom-hooks";
+const LocalValue = () => {
+  const fetchData = () => {
+    //Fetch Data function
+  };
+  const debouncedFetchData = useDebounce(fetchData, 300);
+  /*
+   No matter how many times we call this function in 300ms, it will only
+   execute once.
+  */
+  return <div>Lorem Ipsum</div>;
+};
+```
 
-## Learn More
+### Parameters
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`[inputFunction,delay]`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. `inputFunction` (_function_) : Function which is to be modified.
+2. `delay` (_number_) : The time delay in milliseconds.
 
-### Code Splitting
+### Return value
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`debouncedFunction` (_function_) : The modified function.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+</br>
 
-### Making a Progressive Web App
+## 🔘 useToggle
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Returns a boolean state and a state toggle function.
 
-### Advanced Configuration
+### Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```jsx
+import React from "react";
+import { useToggle } from "use-custom-hooks";
+const Mood = () => {
+  const [isHappy, toggleIsHappy] = useToggle(true);
+  /*
+    If isHappy state is true calling toggleIsHappy function will set 
+    the isHappy state to false, and vise versa.
+  */
+  return (
+    <div>
+      <h1>Hello World</div>
+      <p>{`The user is ${isHappy ? "Happy 😃" : "Sad 😢"}`}</p>
+      <button onClick={toggleIsHappy}>Toggle</button>
+    </div>
+  );
+};
+```
 
-### Deployment
+### Parameters
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. `initialValue` (_boolean_) : Initial value of the state.
 
-### `npm run build` fails to minify
+### Return value
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`[state,toggleFunction]`
+
+1. `state` (_boolean_) : The booelan state.
+2. `toggleFunction` (_function_) : Function to toggle the state value.
+
+</br>
+
+## 🖱 useMousePosition
+
+Returns an object with the current coordinates of the mouse pointer.
+
+### Usage
+
+```jsx
+import React from "react";
+import { useMousePointer } from "use-custom-hooks";
+const Mouse = () => {
+  const { x, y } = useMousePosition();
+  /*
+    Using Object destructuring to get x & y coordinates
+    from mousePosition object.
+  */
+  return (
+    <div>
+      <h1>Mouse Pointer Location</div>
+      <p>The mouse pointer is at : {`(${x},${y})`}</p>
+      {/* The x,y coordinates will be updated as you move your mouse.*/}
+    </div>
+  );
+};
+```
+### Parameters
+
+None : This hooks takes no parameters.
+
+### Return value
+
+`{x,y}`
+
+1. `x` (_number_) : X Coordinate of the mouse.
+2. `y` (_number_) : Y Coordinate of the mouse.
+
+</br>
+
+## 🕒 usePrevious
+
+Custom hook for retrieving the previous useState value
+
+### Usage
+
+```jsx
+import React from "react";
+import { usePrevious } from "use-custom-hooks";
+function App() {
+  // normal usage of useState
+  const [visible, setVisible] = useState(false);
+  
+  // using the custom usePrevious hook to retrieve the value that was provided in the previous render
+  const prevVisibility = usePrevious(visible);
+  
+  // Display both current and previous visibility states
+  return (
+    <div>
+      <h1>Current visibility: {visible ? "visible":"not visible"}</h1>
+      <h1>Previous visibility: {prevVisibility ? "visible":"not visible"}</h1>
+      <button onClick={() => setVisible(!visible)}>Toggle Visibility</button>
+    </div>
+   );
+}
+```
+
+### Parameters
+
+`presentState` (_any_) : The current value (will be the previous value in the next render).
+
+### Return value
+
+`previousState` (_any_) : The previous state.
+
+</br>
