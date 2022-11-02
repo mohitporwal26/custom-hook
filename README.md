@@ -18,7 +18,7 @@ Custom useState hook which saves the state value in localStorage
 
 ```jsx
 import React from "react";
-import { useLocalStorage } from "use-custom-hooks";
+import { useLocalStorage } from "simform-custom-hook";
 const LocalValue = () => {
   const [username, setUserName] = useLocalStorage("john_doe", "username");
   /*
@@ -54,7 +54,7 @@ Convert a normal function to a debounced function.
 
 ```jsx
 import React from "react";
-import { useDebounce } from "use-custom-hooks";
+import { useDebounce } from "simform-custom-hook";
 const LocalValue = () => {
   const fetchData = () => {
     //Fetch Data function
@@ -90,7 +90,7 @@ Returns a boolean state and a state toggle function.
 
 ```jsx
 import React from "react";
-import { useToggle } from "use-custom-hooks";
+import { useToggle } from "simform-custom-hook";
 const Mood = () => {
   const [isHappy, toggleIsHappy] = useToggle(true);
   /*
@@ -128,7 +128,7 @@ Returns an object with the current coordinates of the mouse pointer.
 
 ```jsx
 import React from "react";
-import { useMousePointer } from "use-custom-hooks";
+import { useMousePointer } from "simform-custom-hook";
 const Mouse = () => {
   const { x, y } = useMousePosition();
   /*
@@ -165,7 +165,7 @@ Custom hook for retrieving the previous useState value
 
 ```jsx
 import React from "react";
-import { usePrevious } from "use-custom-hooks";
+import { usePrevious } from "simform-custom-hook";
 function App() {
   // normal usage of useState
   const [visible, setVisible] = useState(false);
