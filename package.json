@@ -1,6 +1,6 @@
 {
   "name": "simform-custom-hook",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A collection of Custom Hooks for React.",
   "main": "src/index.js",
   "dependencies": {
@@ -17,6 +17,7 @@
   "license": "MIT",
   "keywords": [
     "custom-hooks",
+    "simform-custom-hook",
     "react",
     "react-hooks",
     "react-hook",

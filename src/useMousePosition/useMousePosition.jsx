@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useMousePosition = () => {
   const [coordinates, setCoordinates] = useState({});
@@ -13,10 +13,10 @@ const useMousePosition = () => {
 
       setCoordinates(mousePosition);
     };
-    window.addEventListener('mousemove', eventHandler);
+    window.addEventListener("mousemove", eventHandler);
 
     return () => {
-      window.removeEventListener('mousemove', eventHandler);
+      window.removeEventListener("mousemove", eventHandler);
     };
   }, []);
 
