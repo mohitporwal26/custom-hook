@@ -20,14 +20,14 @@ Custom useState hook which saves the state value in localStorage
 import React from "react";
 import { useLocalStorage } from "simform-custom-hook";
 const LocalValue = () => {
-  const [username, setUserName] = useLocalStorage("john_doe", "username");
+  const [name, setName] = useLocalStorage("ram", "name");
   /*
-   If username exists in localStorage, the value of username state will be
-   localStorage.getItem("username"). If username doesn't exist in localStorage, 
-   the value of the state will be "john-doe" and a new item will be created in
-   localStorage will key "username"
+   If name exists in localStorage, the value of name state will be
+   localStorage.getItem("name"). If name doesn't exist in localStorage, 
+   the value of the state will be "ram" and a new item will be created in
+   localStorage will key "name"
   */
-  return <span>Value from localstorage is {username}</span>;
+  return <span>Value from localstorage is {name}</span>;
 };
 ```
 
@@ -50,21 +50,31 @@ const LocalValue = () => {
 Convert a normal function to a debounced function.
 
 > Note: More about Debouncing : [here](https://www.geeksforgeeks.org/debouncing-in-javascript/)
+
 ### Usage
 
 ```jsx
-import React from "react";
+import React, { useState } from "react";
 import { useDebounce } from "simform-custom-hook";
 const LocalValue = () => {
-  const fetchData = () => {
-    //Fetch Data function
+  const [value, setValue] = useState("");
+  const debouncedValue = useDebounce(value, 500);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
   };
-  const debouncedFetchData = useDebounce(fetchData, 300);
+
+  return (
+    <div>
+      <p>Value real-time: {value}</p>
+      <p>Debounced value: {debouncedValue}</p>
+      <input type="text" value={value} onChange={handleChange} />
+    </div>
+  );
   /*
-   No matter how many times we call this function in 300ms, it will only
+   No matter how many times we call this function in 500ms, it will only
    execute once.
   */
-  return <div>Lorem Ipsum</div>;
 };
 ```
 
@@ -78,7 +88,6 @@ const LocalValue = () => {
 ### Return value
 
 `debouncedFunction` (_function_) : The modified function.
-
 
 </br>
 
@@ -94,7 +103,7 @@ import { useToggle } from "simform-custom-hook";
 const Mood = () => {
   const [isHappy, toggleIsHappy] = useToggle(true);
   /*
-    If isHappy state is true calling toggleIsHappy function will set 
+    If isHappy state is true calling toggleIsHappy function will set
     the isHappy state to false, and vise versa.
   */
   return (
@@ -144,6 +153,7 @@ const Mouse = () => {
   );
 };
 ```
+
 ### Parameters
 
 None : This hooks takes no parameters.
@@ -169,18 +179,18 @@ import { usePrevious } from "simform-custom-hook";
 function App() {
   // normal usage of useState
   const [visible, setVisible] = useState(false);
-  
+
   // using the custom usePrevious hook to retrieve the value that was provided in the previous render
   const prevVisibility = usePrevious(visible);
-  
+
   // Display both current and previous visibility states
   return (
     <div>
-      <h1>Current visibility: {visible ? "visible":"not visible"}</h1>
-      <h1>Previous visibility: {prevVisibility ? "visible":"not visible"}</h1>
+      <h1>Current visibility: {visible ? "visible" : "not visible"}</h1>
+      <h1>Previous visibility: {prevVisibility ? "visible" : "not visible"}</h1>
       <button onClick={() => setVisible(!visible)}>Toggle Visibility</button>
     </div>
-   );
+  );
 }
 ```
 
