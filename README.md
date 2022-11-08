@@ -7,6 +7,8 @@
 - [useToggle](#-usetoggle)
 - [useMousePosition](#-usemouseposition)
 - [usePrevious](#-useprevious)
+- [useMediaQuery](#-useMediaQuery)
+- [useCopyToClipboard](#-useCopyToClipboard)
 
 </br>
 
@@ -202,4 +204,69 @@ function App() {
 
 `previousState` (_any_) : The previous state.
 
+</br>
+
+## 📱 useMediaQuery
+
+Custom hook which listens for a media query and updates the state when the query is active/inactive
+
+### Usage
+
+```jsx
+import React from "react";
+import { useMediaQuery } from "simform-custom-hook";
+const BottomNav = () => {
+  const isMobileDevice = useMediaQuery("(max-width:600px)");
+  /*
+   isMobileDevice will be true when the screen size is less than
+   600px, and false otherwise
+  */
+  // Component will only be rendered in mobile devices
+  return isMobileDevice ? <div className="bottom-nav"></div> : null;
+};
+```
+
+### Parameters
+
+1. `mediaQuery` (_String_) : The media query to listen to.
+
+### Return value
+
+1. `isMediaQueryActive` (_any_) : A boolean state denoting if the media query is active or not
+
+</br>
+
+</br>
+
+## 📱 useCopyToClipboard
+
+Custom hook which copy the data and can be used whenever needed.
+
+### Usage
+
+```jsx
+import React from "react";
+import { useCopyToClipboard } from "simform-custom-hook";
+
+const App = () => {
+const [values, copy] = useCopyToClipboard();
+  /*
+   isMobileDevice will be true when the screen size is less than
+   600px, and false otherwise
+  */
+  // Component will only be rendered in mobile devices
+  return (
+    <>
+      <h1>Click to copy:</h1>
+      <div style={{ display: "flex" }}>
+        <button onClick={() => copy("A")}>A</button>
+        <button onClick={() => copy("B")}>B</button>
+        <button onClick={() => copy("C")}>C</button>
+      </div>
+      <p>Copied value: {values ?? "Nothing is copied yet!"}</p>;
+    </>
+  );
+};
+
+```
 </br>
